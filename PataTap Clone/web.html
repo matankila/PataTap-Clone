@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PataTap Demo</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/pat.css">
+	<!-- howler link -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.15/howler.js"></script>
+    <!-- paperjs link -->
+    <script type="text/javascript" src="assets/js/lib/paper-full.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+    circles=[];//set an array for circles
+    
+    var keyData = {
+
+    a:{
+    sound: new Howl({
+    src:['assets/sounds/bubbles.mp3']
+    })
+    },
+
+    b:{
+    sound: new Howl({
+    src:['assets/sounds/clay.mp3']
+    })
+    },
+
+    c:{
+    sound: new Howl({
+    src:['assets/sounds/confetti.mp3']
+    })
+    },
+
+    d:{
+    sound: new Howl({
+    src:['assets/sounds/corona.mp3']
+    })
+    },
+
+    e:{
+    sound: new Howl({
+    src:['assets/sounds/dotted-spiral.mp3']
+    })
+    },
+
+    f:{
+    sound: new Howl({
+    src:['assets/sounds/flash-1.mp3']
+    })
+    },
+
+    g:{
+    sound: new Howl({
+    src:['assets/sounds/flash-2.mp3']
+    })
+    },
+
+    h:{
+    sound: new Howl({
+    src:['assets/sounds/flash-3.mp3']
+    })
+    },
+
+    i:{
+    sound: new Howl({
+    src:['assets/sounds/flash-3.mp3']
+    })
+    },
+
+    j:{
+    sound: new Howl({
+    src:['assets/sounds/glimmer.mp3']
+    })
+    },
+
+    k:{
+    sound: new Howl({
+    src:['assets/sounds/moon.mp3']
+    })
+    },
+
+    l:{
+    sound: new Howl({
+    src:['assets/sounds/pinwheel.mp3']
+    })
+    },
+
+    m:{
+    sound: new Howl({
+    src:['assets/sounds/piston-1.mp3']
+    })
+    },
+
+    n:{
+    sound: new Howl({
+    src:['assets/sounds/piston-2.mp3']
+    })
+    },
+
+    o:{
+    sound: new Howl({
+    src:['assets/sounds/piston-3.mp3']
+    })
+    },
+
+    p:{
+    sound: new Howl({
+    src:['assets/sounds/prism-1.mp3']
+    })
+    },
+
+    q:{
+    sound: new Howl({
+    src:['assets/sounds/prism-2.mp3']
+    })
+    },
+
+    r:{
+    sound: new Howl({
+    src:['assets/sounds/prism-3.mp3']
+    })
+    },
+
+    s:{
+    sound: new Howl({
+    src:['assets/sounds/splits.mp3']
+    })
+    },
+
+    t:{
+    sound: new Howl({
+    src:['assets/sounds/squiggle.mp3']
+    })
+    },
+
+    u:{
+    sound: new Howl({
+    src:['assets/sounds/strike.mp3']
+    })
+    },
+
+    v:{
+    sound: new Howl({
+    src:['assets/sounds/suspension.mp3']
+    })
+    },
+
+    w:{
+    sound: new Howl({
+    src:['assets/sounds/timer.mp3']
+    })
+    },
+
+    x:{
+    sound: new Howl({
+    src:['assets/sounds/ufo.mp3']
+    })
+    },
+
+    y:{
+    sound: new Howl({
+    src:['assets/sounds/veil.mp3']
+    })
+    },
+
+    z:{
+    sound: new Howl({
+    src:['assets/sounds/wipe.mp3']
+    })
+    }
+
+    }
+   
+    //on key press event
+    function onKeyDown(event) 
+    {
+    	if(keyData[event.key])
+    	{
+    		document.querySelector("#in").style.opacity="0";  		
+            var size,r,g,b;
+    		//setting random resizable x,y point on the screen
+            var maxPoint = new Point(outerWidth,outerHeight);
+            var randPoint = Point.random();
+            var point = maxPoint * randPoint;
+            //setting random r g b values for color
+            r=Math.floor(Math.random()*255);
+            g=Math.floor(Math.random()*255);
+            b=Math.floor(Math.random()*255);
+            size=Math.floor(Math.random()*300)+100;//size:100-300
+            var newCircle = new Path.Circle(point, size);//create new circle
+            var newCircleColor = newCircle.fillColor = 'rgb('+r+', '+g+', '+b+')'; //contain the new circle color
+            //var sound= new Howl({src:['assets/sounds/wipe.mp3']}).play();
+            keyData[event.key].sound.play();
+            circles.push(newCircle);//enter the circle to an array
+    	}
+    }
+    //change every frame event
+    function onFrame(event) 
+    {
+    	for(var i=0;i<circles.length;i++)
+    	{
+    	    circles[i].fillColor.hue += 1;//change color 
+	        circles[i].scale(0.9);//make animation of the circle
+    	}
+    }
+ 
+    </script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+	<h1 id="in">Use keys from A-Z & Sound On!</h1>
+
+</body>
+</html>
